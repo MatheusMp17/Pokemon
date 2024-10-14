@@ -1,6 +1,7 @@
 public class Pokemon {
     private String nome;
     private TipoPokemon tipo;
+    private Regioes regiao; // Região de origem do Pokémon
     private int vida;
     private int forcaAtaque; // Força de ataque
     private int defesa;      // Defesa
@@ -27,6 +28,9 @@ public class Pokemon {
         System.out.println(this.nome + " inicia uma luta contra " + alvo.nome + "!");
 
         // Simulação de turnos de luta
+        // Ajustar quem ataca antes em função da velocidade (primeiro ataque)
+        // como calcular a chance de atacar (ratio de ataque)
+
         while (this.vida > 0 && alvo.vida > 0) {
             this.atacar(alvo);
             if (alvo.vida > 0) {
@@ -76,6 +80,18 @@ public class Pokemon {
         } else {
             System.out.println(nome + " já está na sua forma final e não pode evoluir mais.");
         }
+    }
+
+    public void setRegiao(Regioes regiao) {
+        this.regiao = regiao;
+    }
+
+    public Regioes getRegiao() {
+        return regiao;
+    }
+
+    public String getNomeRegiao() {
+        return regiao.getNome();
     }
 
     @Override
