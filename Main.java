@@ -8,5 +8,6 @@ public class Main {
         // Exibir informações finais dos Pokémon
         System.out.println(pokemon1);
         System.out.println(pokemon2);
+        // teste
     }
 }
