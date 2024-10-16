@@ -27,14 +27,18 @@ public class Pokemon {
     public void lutar(Pokemon alvo) {
         System.out.println(this.nome + " inicia uma luta contra " + alvo.nome + "!");
 
-        // Simulação de turnos de luta
-        // Ajustar quem ataca antes em função da velocidade (primeiro ataque)
-        // como calcular a chance de atacar (ratio de ataque)
-
+        // Simulação de turnos de luta, considerando a velocidade
         while (this.vida > 0 && alvo.vida > 0) {
-            this.atacar(alvo);
-            if (alvo.vida > 0) {
+            if (this.velocidade >= alvo.velocidade) {
+                this.atacar(alvo);
+                if (alvo.vida > 0) {
+                    alvo.atacar(this);
+                }
+            } else {
                 alvo.atacar(this);
+                if (this.vida > 0) {
+                    this.atacar(alvo);
+                }
             }
         }
 
@@ -50,12 +54,16 @@ public class Pokemon {
     }
 
     public void atacar(Pokemon alvo) {
-        float danoBase = forcaAtaque * tipo.calcularDano(alvo.tipo);
-        danoBase -= alvo.defesa; 
-        if (danoBase < 0) danoBase = 0;
-
+        float danoBase = calcularDano(alvo);
+        
         System.out.println(nome + " ataca " + alvo.nome + " e causa " + danoBase + " de dano.");
         alvo.sofrerDano((int) danoBase);
+    }
+
+    private float calcularDano(Pokemon alvo) {
+        float danoBase = forcaAtaque * tipo.calcularDano(alvo.tipo);
+        danoBase -= alvo.defesa; 
+        return Math.max(danoBase, 0); // Garantir que o dano não seja negativo
     }
 
     public void registrarLuta() {
@@ -65,6 +73,7 @@ public class Pokemon {
 
     public void sofrerDano(int dano) {
         this.vida -= dano;
+        if (this.vida < 0) this.vida = 0; // Garantir que a vida não fique negativa
         System.out.println(nome + " sofreu " + dano + " de dano. Vida restante: " + vida);
     }
 
