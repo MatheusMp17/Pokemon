@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 public class Pokemon {
     private String nome;
     private TipoPokemon tipo;
@@ -10,6 +11,7 @@ public class Pokemon {
     private final int numeroEvolucoes; // Número total de evoluções possíveis
     private int numeroLutas; // Número de lutas que o Pokémon participou
     private int evolucaoAtual;   // Evolução atual do Pokémon
+    private ArrayList <TiposAtaque> ataqueAprendido;
 
     public Pokemon(String nome, TipoPokemon tipo, int forcaAtaque, int defesa, int velocidade, int nivel, int numeroEvolucoes) {
         this.nome = nome;
@@ -22,6 +24,7 @@ public class Pokemon {
         this.numeroEvolucoes = numeroEvolucoes;
         this.evolucaoAtual = 0; // Começa sem evoluções
         this.numeroLutas = 0; // Começa sem lutas
+        ataqueAprendido = new ArrayList<>();
     }
 
     public void lutar(Pokemon alvo) {
@@ -103,6 +106,17 @@ public class Pokemon {
         return regiao.getNome();
     }
 
+    public void setAtaques(TiposAtaque ataque){
+        if (ataqueAprendido.size() < 4 ) {
+            ataqueAprendido.addLast(ataque);
+        }
+    }
+    public TiposAtaque getAtaqueAprendido(int indiceAtaque){
+        return ataqueAprendido.get(indiceAtaque);
+    }
+    public void substituirAtaque(int indiceAtaqueDesabrendido, TiposAtaque novoAtaque){
+        ataqueAprendido.set(indiceAtaqueDesabrendido, novoAtaque);
+    }
     @Override
     public String toString() {
         return String.format("%s (%s) - Vida: %d, Força de Ataque: %d, Defesa: %d, Velocidade: %d, Nível: %d, Evolução Atual: %d/%d",

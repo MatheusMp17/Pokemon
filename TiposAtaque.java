@@ -123,6 +123,6 @@ public enum TiposAtaque {
    @Override
    public String toString() {
         return String.format("%s (%s) - PP: %d, Dano: %d, Acerto: %d%%",
-                nome,tipo.getNome(), pontosDePoder,danoBase,%percentualAcerto);
+                nome,tipo.getNome(), pontosDePoder,danoBase,percentualAcerto);
    }
 }
