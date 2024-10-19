@@ -12,6 +12,7 @@ public class Pokemon {
     private int numeroLutas; // Número de lutas que o Pokémon participou
     private int evolucaoAtual;   // Evolução atual do Pokémon
     private ArrayList <TiposAtaque> ataqueAprendido;
+    private int[] ppAtual; 
 
     public Pokemon(String nome, TipoPokemon tipo, int forcaAtaque, int defesa, int velocidade, int nivel, int numeroEvolucoes) {
         this.nome = nome;
@@ -25,6 +26,8 @@ public class Pokemon {
         this.evolucaoAtual = 0; // Começa sem evoluções
         this.numeroLutas = 0; // Começa sem lutas
         ataqueAprendido = new ArrayList<>();
+        setPpAtual();
+        
     }
 
     public void lutar(Pokemon alvo) {
@@ -110,6 +113,30 @@ public class Pokemon {
         if (ataqueAprendido.size() < 4 ) {
             ataqueAprendido.addLast(ataque);
         }
+    }
+    public void setPpAtual() {
+        ppAtual = new int[]
+            {ataqueAprendido.get(0).getPontosDePoder(), 
+            ataqueAprendido.get(1).getPontosDePoder(), 
+            ataqueAprendido.get(2).getPontosDePoder(), 
+            ataqueAprendido.get(3).getPontosDePoder()};
+    }
+    public int getPpAtual(int indice) {
+        return ppAtual[indice];
+    }
+
+    public void reduzirPpAtual(int indice, int indiceGasto){
+        if(ppAtual[indice] - indiceGasto >= 0 &&  indiceGasto > 0)
+            ppAtual[indice] = ppAtual[indice] - indiceGasto;
+        else if (ppAtual[indice] - indiceGasto < 0 &&  indiceGasto > 0)
+            ppAtual[indice] = 0;
+    }
+
+    public void AumentarPpAtual(int indice, int indiceGanho){
+        if(ppAtual[indice] + indiceGanho <=  ataqueAprendido.get(indice).getPontosDePoder() &&  indiceGanho > 0)
+            ppAtual[indice] = ppAtual[indice] + indiceGanho;
+        else if (ppAtual[indice] + indiceGanho >  ataqueAprendido.get(indice).getPontosDePoder() &&  indiceGanho > 0)
+            ppAtual[indice] = ataqueAprendido.get(indice).getPontosDePoder();
     }
     public TiposAtaque getAtaqueAprendido(int indiceAtaque){
         return ataqueAprendido.get(indiceAtaque);
