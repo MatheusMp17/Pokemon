@@ -26,8 +26,6 @@ public class Pokemon {
         this.evolucaoAtual = 0; // Começa sem evoluções
         this.numeroLutas = 0; // Começa sem lutas
         ataqueAprendido = new ArrayList<>();
-        setPpAtual();
-        
     }
 
     public void lutar(Pokemon alvo) {
