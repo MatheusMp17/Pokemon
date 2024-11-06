@@ -6,6 +6,5 @@ public class PokemonAgua extends Pokemon {
     setAtaques(null);
     setAtaques(TiposAtaque.JATO_DE_AGUA);
     setPpAtual();
-
     }
 }

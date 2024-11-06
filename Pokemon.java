@@ -12,7 +12,7 @@ public class Pokemon {
     private int numeroLutas; // Número de lutas que o Pokémon participou
     private int evolucaoAtual;   // Evolução atual do Pokémon
     private ArrayList <TiposAtaque> ataqueAprendido;
-    private int[] ppAtual; 
+    private int[] ppAtual;
 
     public Pokemon(String nome, TipoPokemon tipo, int forcaAtaque, int defesa, int velocidade, int nivel, int numeroEvolucoes) {
         this.nome = nome;
@@ -25,7 +25,8 @@ public class Pokemon {
         this.numeroEvolucoes = numeroEvolucoes;
         this.evolucaoAtual = 0; // Começa sem evoluções
         this.numeroLutas = 0; // Começa sem lutas
-        ataqueAprendido = new ArrayList<>();
+        this.ataqueAprendido = new ArrayList<>();
+        this.ppAtual = new int[4];
     }
 
     public void lutar(Pokemon alvo) {
@@ -108,16 +109,24 @@ public class Pokemon {
     }
 
     public void setAtaques(TiposAtaque ataque){
-        if (ataqueAprendido.size() < 4 ) {
+        if (ataqueAprendido.size() < 5 ) {
             ataqueAprendido.addLast(ataque);
         }
     }
     public void setPpAtual() {
-        ppAtual = new int[]
-            {ataqueAprendido.get(0).getPontosDePoder(), 
-            ataqueAprendido.get(1).getPontosDePoder(), 
-            ataqueAprendido.get(2).getPontosDePoder(), 
-            ataqueAprendido.get(3).getPontosDePoder()};
+        if(ataqueAprendido.get(0) != null){
+            ppAtual[0] = ataqueAprendido.get(0).getPontosDePoder();
+        }
+        if(ataqueAprendido.get(1) != null){
+            ppAtual[1] = ataqueAprendido.get(1).getPontosDePoder();
+        }
+        if(ataqueAprendido.get(2) != null){
+            ppAtual[2] = ataqueAprendido.get(2).getPontosDePoder();
+        }
+        if(ataqueAprendido.get(3) != null){
+            ppAtual[3] = ataqueAprendido.get(3).getPontosDePoder();
+        }
+        
     }
     public int getPpAtual(int indice) {
         return ppAtual[indice];
